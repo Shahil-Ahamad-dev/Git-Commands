@@ -1,10 +1,6 @@
-
-
 ---
 
 # **Git Commands Cheat Sheet**
-
-A comprehensive guide to common Git commands for setup, repository management, collaboration, and troubleshooting.
 
 ---
 
@@ -22,7 +18,8 @@ A comprehensive guide to common Git commands for setup, repository management, c
 11. [Stashing](#stashing)  
 12. [Tags](#tags)  
 13. [Advanced Commands](#advanced-commands)  
-14. [Collaboration Commands](#collaboration-commands)
+14. [Collaboration Commands](#collaboration-commands)  
+15. [Additional Useful Commands](#additional-useful-commands)
 
 ---
 
@@ -34,9 +31,10 @@ git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 ```
 
-### View Configuration
+### View or Edit Configuration
 ```bash
 git config --list
+git config --global --edit
 ```
 
 ---
@@ -51,6 +49,7 @@ git init
 ### Clone an Existing Repository
 ```bash
 git clone <repository_url>
+git clone --depth 1 <repository_url>  # Clone with minimal history
 ```
 
 ---
@@ -66,6 +65,7 @@ git status
 ```bash
 git add <file>    # Stage a specific file
 git add .         # Stage all changes
+git add -p        # Stage changes interactively
 ```
 
 ### Unstage or Discard Changes
@@ -83,6 +83,11 @@ git restore --staged <file>  # Unstage a file
 git commit -m "Commit message"
 ```
 
+### Commit All Changes
+```bash
+git commit -am "Commit message"  # Adds and commits all tracked files
+```
+
 ### Amend the Last Commit
 ```bash
 git commit --amend
@@ -95,14 +100,10 @@ git commit --amend
 ### View Commit History
 ```bash
 git log
+git log --oneline --graph --all  # Detailed log with branches
 ```
 
-### Simplified Commit History
-```bash
-git log --oneline
-```
-
-### Show Details of a Specific Commit
+### View Changes in a Commit
 ```bash
 git show <commit>
 ```
@@ -111,26 +112,17 @@ git show <commit>
 
 ## **6. Branching**
 
-### List Branches
+### Manage Branches
 ```bash
-git branch
+git branch                        # List branches
+git branch <branch_name>          # Create a branch
+git checkout <branch_name>        # Switch to a branch
+git checkout -b <branch_name>     # Create and switch to a branch
 ```
 
-### Create a New Branch
+### Rename a Branch
 ```bash
-git branch <branch_name>
-```
-
-### Switch Branches
-```bash
-git checkout <branch_name>       # Switch to an existing branch
-git checkout -b <branch_name>    # Create and switch to a new branch
-```
-
-### Delete a Branch
-```bash
-git branch -d <branch_name>      # Safe delete
-git branch -D <branch_name>      # Force delete
+git branch -m <new_branch_name>
 ```
 
 ---
@@ -142,55 +134,63 @@ git branch -D <branch_name>      # Force delete
 git merge <branch_name>
 ```
 
+### Resolve Merge Conflicts
+When conflicts arise, resolve them manually in files and use:
+```bash
+git add <file>     # After resolving conflicts
+git merge --continue
+```
+
 ---
 
 ## **8. Remote Repositories**
 
-### Manage Remotes
-```bash
-git remote -v                    # Show remote repositories
-git remote add <name> <url>      # Add a new remote repository
-```
-
 ### Synchronize Changes
 ```bash
-git pull                         # Fetch and merge changes from the remote
-git fetch                        # Fetch changes without merging
-git push                         # Push changes to the remote
-git push -u origin <branch_name> # Push a new branch and track it remotely
+git pull                         # Fetch and merge from the remote
+git fetch                        # Fetch changes only
+git push                         # Push local changes to remote
+git push origin --delete <branch_name>  # Delete a remote branch
 ```
 
 ---
 
 ## **9. Viewing Differences**
 
-### View File Differences
+### View Differences
 ```bash
 git diff                         # Working directory vs staging area
 git diff --staged                # Staging area vs last commit
+git diff HEAD                    # All changes vs the last commit
 ```
 
 ---
 
 ## **10. Undoing Changes**
 
-### Reset or Revert Changes
+### Reset Commits
 ```bash
 git reset <commit>               # Reset staging area to a specific commit
 git reset --hard <commit>        # Reset staging area and working directory
-git revert <commit>              # Create a new commit to reverse a specific commit
+```
+
+### Undo the Last Commit
+```bash
+git reset --soft HEAD~1          # Keep changes in the staging area
+git reset --mixed HEAD~1         # Keep changes in the working directory
 ```
 
 ---
 
 ## **11. Stashing**
 
-### Manage Stashes
+### Save and Manage Stashes
 ```bash
 git stash                        # Save changes temporarily
-git stash list                   # View all stashes
+git stash list                   # List all stashes
 git stash apply                  # Reapply the most recent stash
-git stash drop                   # Delete the most recent stash
+git stash pop                    # Apply and delete the most recent stash
+git stash drop                   # Delete a specific stash
 ```
 
 ---
@@ -201,32 +201,55 @@ git stash drop                   # Delete the most recent stash
 ```bash
 git tag                          # List all tags
 git tag <tag_name>               # Create a lightweight tag
-git tag -a <tag_name> -m "Message" # Create an annotated tag
-git push origin <tag_name>       # Push a tag to the remote
+git tag -a <tag_name> -m "Message"  # Create an annotated tag
 ```
 
 ---
 
 ## **13. Advanced Commands**
 
-### Advanced Operations
+### Rebase Commits
 ```bash
 git rebase <branch>              # Reapply commits on top of another branch
-git reflog                       # Show history of HEAD references
-git bisect                       # Binary search to find a problematic commit
+```
+
+### Clean Untracked Files
+```bash
 git clean -f                     # Remove untracked files
+git clean -fd                    # Remove untracked files and directories
 ```
 
 ---
 
 ## **14. Collaboration Commands**
 
-### Collaboration and Debugging
+### Debugging and Collaboration
 ```bash
 git blame <file>                 # Show who last modified each line
 git cherry-pick <commit>         # Apply a specific commit to the current branch
+git shortlog -sn                 # Show contributor stats
 ```
 
 ---
 
-This enhanced version is optimized for readability and usability while keeping the information concise. Let me know if you'd like any additional modifications!
+## **15. Additional Useful Commands**
+
+### Squash Commits
+Combine multiple commits into one:
+```bash
+git rebase -i HEAD~<number_of_commits>
+```
+
+### Check File History
+```bash
+git log -- <file>                # See history of changes for a file
+```
+
+### Archive a Repository
+```bash
+git archive --format=zip HEAD -o repo.zip  # Create a zip archive of the repo
+```
+
+---
+
+This enhanced version includes more commands for handling advanced workflows and common scenarios. Let me know if there's a specific use case you'd like addressed!
