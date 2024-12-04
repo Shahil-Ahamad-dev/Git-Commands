@@ -4,22 +4,25 @@
 
 ---
 
+
 ## **Table of Contents**
-1. [Setup and Configuration](#setup-and-configuration)  
-2. [Repository Initialization](#repository-initialization)  
-3. [Status and Changes](#status-and-changes)  
-4. [Commits](#commits)  
-5. [Logs and History](#logs-and-history)  
-6. [Branching](#branching)  
-7. [Merging](#merging)  
-8. [Remote Repositories](#remote-repositories)  
-9. [Viewing Differences](#viewing-differences)  
-10. [Undoing Changes](#undoing-changes)  
-11. [Stashing](#stashing)  
-12. [Tags](#tags)  
-13. [Advanced Commands](#advanced-commands)  
-14. [Collaboration Commands](#collaboration-commands)  
-15. [Additional Useful Commands](#additional-useful-commands)
+1. [Setup and Configuration](#1-setup-and-configuration)  
+2. [Repository Initialization](#2-repository-initialization)  
+3. [Status and Changes](#3-status-and-changes)  
+4. [Commits](#4-commits)  
+5. [Logs and History](#5-logs-and-history)  
+6. [Branching](#6-branching)  
+7. [Merging](#7-merging)  
+8. [Remote Repositories](#8-remote-repositories)  
+9. [Viewing Differences](#9-viewing-differences)  
+10. [Undoing Changes](#10-undoing-changes)  
+11. [Stashing](#11-stashing)  
+12. [Tags](#12-tags)  
+13. [Advanced Commands](#13-advanced-commands)  
+14. [Collaboration Commands](#14-collaboration-commands)  
+15. [Additional Useful Commands](#15-additional-useful-commands)
+
+
 
 ---
 
